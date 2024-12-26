@@ -1,0 +1,32 @@
+.alert-history-container{
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.alert-history-container h5{
+  color: var(--secondary-text-color);
+}
+
+.alert-history-container .chart-container{
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.alert-history-container .chart-container .custom-body{
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-history-container .chart-container .custom-body .chart{
+  width: 100%;
+  height: 100% !important;
+}
+

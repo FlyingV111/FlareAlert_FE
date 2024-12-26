@@ -1,0 +1,46 @@
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 4fr minmax(300px, 1fr);
+  gap: 1.5rem;
+  overflow: hidden;
+}
+
+.col1,
+.col2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.col1 {
+  grid-column: span 1;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+.col2 {
+  grid-column: span 1;
+  height: 100%;
+}
+
+.col1 alert-history-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.current-alert{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  z-index: 4;
+}

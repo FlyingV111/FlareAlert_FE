@@ -1,1 +1,194 @@
-/* You can add global styles to this file, and also import other style files */
+
+.custom-table-group-divider {
+  border-top: var(--accent-color) solid
+}
+
+[data-bs-theme=dark] {
+  --background-color: #111826;
+  --card-bg-color: #151D2C;
+  --border-color: #374151;
+  --hover-color: #182130;
+  --second-card-color: #182130;
+  --input-bg-color: #1A2332;
+  --accent-color: #ef5244;
+  --nav-element-color: #ffffff;
+  --nav-active-element: #1A2332;
+  --profile-picture-color: #374151;
+  --accent-bg-color: #432834;
+  --accent-hover-bg-color: #EF524477;
+  --secondary-text-color: #9CA3AF;
+  --text-color: #ffffff;
+
+  .text-secondary {
+    color: var(--secondary-text-color) !important;
+  }
+
+  .dropdown-menu {
+    --bs-dropdown-bg: var(--card-bg-color);
+    --bs-dropdown-link-active-bg: var(--input-bg-color);
+  }
+
+  .dropdown-menu li:hover {
+    --bs-dropdown-link-hover-bg: var(--hover-color);
+  }
+
+  .btn-primary {
+    --bs-btn-bg: var(--accent-color);
+    --bs-btn-border-color: var(--accent-color);
+    --bs-btn-hover-bg: var(--accent-hover-bg-color);
+    --bs-btn-hover-border-color: var(--accent-hover-bg-color);
+    --bs-btn-active-bg: var(--accent-bg-color);
+    --bs-btn-active-border-color: var(--accent-bg-color);
+    --bs-btn-disabled-bg: var(--accent-bg-color);
+    --bs-btn-disabled-border-color: var(--accent-bg-color);
+  }
+
+  a{
+    color: var(--accent-color);
+  }
+
+
+  .card {
+    position: static !important;
+    background-color: var(--card-bg-color) !important;
+    border: none !important;
+    border-radius: .8rem !important;
+  }
+
+  .card-border {
+    background-color: var(--card-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: .8rem !important;
+  }
+
+  .secondary-card {
+    background-color: var(--second-card-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: .8rem !important;
+  }
+
+  .form-control {
+    background-color: var(--input-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+
+  .custom-nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--nav-element-color);
+  }
+
+  .custom-nav-btn:active:disabled,
+  .custom-nav-btn:disabled {
+    background: transparent;
+    color: var(--border-color);
+    pointer-events: auto;
+    cursor: not-allowed;
+  }
+
+  .custom-nav-btn:active:not(:disabled) {
+    background: var(--background-color) !important;
+    border: 1px solid var(--nav-active-element) !important;
+    color: var(--nav-active-element) !important;
+  }
+
+  .custom-nav-btn.active,
+  .custom-nav-btn:hover {
+    background: var(--hover-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .custom-nav-btn.active {
+    color: var(--accent-color);
+  }
+
+  h1, h2, h3, h4, h5, h6, span, p {
+    margin: 0;
+  }
+}
+
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100dvh;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+main::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+main.show-alert::before {
+  opacity: 1;
+}
+
+main.show-alert .current-alert{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 1;
+
+  border: 1px solid var(--accent-color) !important;
+  transform: scale(1);
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.01);
+  }
+
+  105% {
+    transform: scale(1);
+  }
+}
+
+
+.secondary-card-background {
+  background-color: var(--second-card-color);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 50px;
+}
+
+lucide-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,29 @@
+.side-nav-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+}
+
+.side-nav-container .brand-icon-container{
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.side-nav-container .button-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: .5rem;
+}
+
+.side-nav-container .button-container .nav-button{
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

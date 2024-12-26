@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <div class="navbar-brand" routerLink="/dashboard">
+    <lucide-icon name="triangle-alert" size="32" color="var(--accent-color)"></lucide-icon>
+    <span>Flare Alert</span>
+  </div>
+  <div class="navbar-right">
+    <button class="btn custom-nav-btn notification-btn" disabled>
+      <lucide-icon name="bell" size="24"></lucide-icon>
+      <span *ngIf="notificationsCount > 0" class="notification-badge">{{ notificationsCount }}</span>
+    </button>
+
+    <!-- User Dropdown -->
+    <div class="user-dropdown dropdown">
+      <button
+        class="user-info btn dropdown-toggle"
+        type="button"
+        id="userDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <div class="user-avatar">
+          <lucide-icon name="user" size="24" color="var(--secondary-text-color)"></lucide-icon>
+        </div>
+        <span>Max Mustermann</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="/user-settings">User Settings</a></li>
+        <li>
+          <hr class="dropdown-divider"/>
+        </li>
+        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
