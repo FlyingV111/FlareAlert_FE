@@ -55,10 +55,10 @@ export class LoginComponent {
   }
 
   async googleSignIn() {
-    // await this.authService.googleAuth()
+    await this.authService.googleAuth()
   }
 
   async githubSignIn() {
-    // await this.authService.githubAuth()
+    await this.authService.githubAuth()
   }
 }

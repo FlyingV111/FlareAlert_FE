@@ -19,6 +19,10 @@
   --secondary-text-color: #9CA3AF;
   --text-color: #ffffff;
 
+  a {
+    color: var(--accent-color);
+  }
+
   .text-secondary {
     color: var(--secondary-text-color) !important;
   }
@@ -26,6 +30,8 @@
   .dropdown-menu {
     --bs-dropdown-bg: var(--card-bg-color);
     --bs-dropdown-link-active-bg: var(--input-bg-color);
+    --bs-dropdown-link-active-color: var(--text-color);
+    --bs-dropdown-link-hover-color: var(--text-color);
   }
 
   .dropdown-menu li:hover {
@@ -41,10 +47,6 @@
     --bs-btn-active-border-color: var(--accent-bg-color);
     --bs-btn-disabled-bg: var(--accent-bg-color);
     --bs-btn-disabled-border-color: var(--accent-bg-color);
-  }
-
-  a{
-    color: var(--accent-color);
   }
 
 
@@ -141,7 +143,7 @@ main.show-alert::before {
   opacity: 1;
 }
 
-main.show-alert .current-alert{
+main.show-alert .current-alert {
   top: 0;
   left: 0;
   width: 100%;

@@ -1,9 +1,17 @@
 <main id="alert-root">
-  <side-nav class="side-nav" *ngIf="isLoggedIn()"></side-nav>
-  <div class="content-container">
-    <top-nav class="top-nav" *ngIf="isLoggedIn()"></top-nav>
-    <div class="content">
-      <router-outlet></router-outlet>
+  @if(isSiteLoading()) {
+    <div class="loadingContainer">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
-  </div>
+  } @else {
+    <side-nav class="side-nav" *ngIf="isLoggedIn() && !isSiteLoading()"></side-nav>
+    <div class="content-container">
+      <top-nav class="top-nav" *ngIf="isLoggedIn() && !isSiteLoading()"></top-nav>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  }
 </main>

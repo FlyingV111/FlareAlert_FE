@@ -1,5 +1,5 @@
 import {CommonModule, DatePipe} from '@angular/common';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {AppComponent} from './app.component';
@@ -7,15 +7,21 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 
 import {
-  Bell, BellRing, Clock,
+  Bell,
+  BellRing,
+  Clock,
   Eye,
   EyeOff,
   Home,
-  ImageUp, KeySquare,
-  LucideAngularModule, Mail, MapPin,
+  ImageUp,
+  KeySquare,
+  LucideAngularModule,
+  Mail,
+  MapPin,
   MessageSquareWarning,
   TriangleAlert,
-  User, Users
+  User,
+  Users
 } from 'lucide-angular';
 import {RouterOutlet} from '@angular/router';
 import {AppRoutingModule} from './app.routes';

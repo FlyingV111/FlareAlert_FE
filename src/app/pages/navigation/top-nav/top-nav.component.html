@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="navbar-brand" routerLink="/dashboard">
     <lucide-icon name="triangle-alert" size="32" color="var(--accent-color)"></lucide-icon>
-    <span>Flare Alert</span>
+    <span>Flare Ulert</span>
   </div>
   <div class="navbar-right">
     <button class="btn custom-nav-btn notification-btn" disabled>
@@ -9,8 +9,7 @@
       <span *ngIf="notificationsCount > 0" class="notification-badge">{{ notificationsCount }}</span>
     </button>
 
-    <!-- User Dropdown -->
-    <div class="user-dropdown dropdown">
+    <div class="user-dropdown dropdown" *ngIf="user() as user else loadingUser">
       <button
         class="user-info btn dropdown-toggle"
         type="button"
@@ -18,18 +17,33 @@
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <div class="user-avatar">
-          <lucide-icon name="user" size="24" color="var(--secondary-text-color)"></lucide-icon>
-        </div>
-        <span>Max Mustermann</span>
+        @if (user.photoURL != null) {
+          <div
+            [style.background]="'url(' + user.photoURL + ') no-repeat center center'"
+            [style.reference-policy]="'no-referrer'"
+            [style.background-size]="'cover'"
+            [style.height]="'32px'"
+            [style.width]="'32px'"
+            class="avatar rounded-circle me-2">
+          </div>
+        } @else {
+          <div class="user-avatar">
+            <lucide-icon name="user" size="24" color="var(--secondary-text-color)"></lucide-icon>
+          </div>
+        }
+        <span>{{ user.displayName }}</span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown">
         <li><a class="dropdown-item" href="/user-settings">User Settings</a></li>
         <li>
           <hr class="dropdown-divider"/>
         </li>
-        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
       </ul>
     </div>
+    <ng-template #loadingUser>
+      <span class="spinner-border text-secondary spinner-border-sm" aria-hidden="true"></span>
+      <span class="text-secondary" role="status">Loading Userdata...</span>
+    </ng-template>
   </div>
 </nav>

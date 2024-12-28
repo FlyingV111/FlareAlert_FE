@@ -1,6 +1,5 @@
 import {Component, effect, inject, signal} from '@angular/core';
 import {AuthService} from './services/auth/authService/auth.service';
-import {AlertService} from './services/alert-service/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +9,20 @@ import {AlertService} from './services/alert-service/alert.service';
 })
 export class AppComponent {
   private authService = inject(AuthService)
-  protected alertService = inject(AlertService);
-
+  protected isSiteLoading = signal(false)
   protected isLoggedIn = signal(false)
 
   constructor() {
     effect(() => {
-      this.isLoggedIn.set(this.authService.isLoggedIn())
+      this.authService.isLoggedIn$.subscribe((loggedIn) => {
+        this.isLoggedIn.set(loggedIn)
+      })
+    });
+
+    effect(() => {
+      this.isSiteLoading.set(this.authService.isSiteLoading())
     });
   }
+
   title = 'FlareAlert';
 }

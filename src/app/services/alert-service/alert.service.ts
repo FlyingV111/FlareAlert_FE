@@ -28,12 +28,12 @@ export class AlertService {
     }
 
     this.blinkInterval = window.setInterval(() => {
-      document.title = (document.title === this.originalTitle) ? "Alert!" : this.originalTitle;
+      document.title = (document.title === this.originalTitle) ? "Ulert!" : this.originalTitle;
     }, 1000);
 
     this.sendDesktopNotification(
-      'Alert!',
-      'A Alert has been triggered and is currently active',
+      'Ulert!',
+      'A Ulert has been triggered and is currently active',
     );
     this.playAlertSound();
     this.switchIcon(this.alertIconLink);
