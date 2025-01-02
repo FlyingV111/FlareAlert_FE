@@ -60,8 +60,6 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     RouterOutlet,
     SideNavComponent,
     TopNavComponent,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     NgxEchartsModule.forRoot({echarts}),
   ],
   providers: [

@@ -1,14 +1,14 @@
 <main id="alert-root">
-  @if(isSiteLoading()) {
+  @if (isSiteLoading()) {
     <div class="loadingContainer">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   } @else {
-    <side-nav class="side-nav" *ngIf="isLoggedIn() && !isSiteLoading()"></side-nav>
+    <side-nav class="side-nav" *ngIf="authService.isAuthenticated && !isSiteLoading()"></side-nav>
     <div class="content-container">
-      <top-nav class="top-nav" *ngIf="isLoggedIn() && !isSiteLoading()"></top-nav>
+      <top-nav class="top-nav" *ngIf="authService.isAuthenticated && !isSiteLoading()"></top-nav>
       <div class="content">
         <router-outlet></router-outlet>
       </div>

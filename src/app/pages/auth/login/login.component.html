@@ -15,6 +15,27 @@
             <form [ngClass]="'inputForm'" [formGroup]="signInForm" class="sub-form" [class.was-validated]="isFormSubmitted">
               <div class="form-floating w-100 mb-3">
                 <input
+                  type="text" formControlName="userNameLogin" class="form-control" id="userNameLogin" placeholder="Username" required>
+                <label for="userNameLogin" class="form-label">
+                  <div class="sign-in-label">
+                    <lucide-icon name="user"></lucide-icon>
+                    Username
+                  </div>
+                </label>
+
+                @if (signInForm.controls['userNameLogin'] && signInForm.controls['userNameLogin'].errors?.['required']) {
+                  <div class="invalid-feedback">
+                    Username field cannot be empty.
+                  </div>
+                }
+                @if (signInForm.controls['userNameLogin'] && signInForm.controls['userNameLogin'].errors?.['pattern']) {
+                  <div class="invalid-feedback">
+                    Username format not valid.
+                  </div>
+                }
+              </div>
+              <div class="form-floating w-100 mb-3">
+                <input
                   type="email" formControlName="userEmailLogin" class="form-control" id="userEmailLogin"
                   placeholder="name@example.com" required>
                 <label for="userEmailLogin" class="form-label">
@@ -61,10 +82,10 @@
     <div class="login-submit-container">
       <h5 class="m-0">Or <b>Continue</b> with</h5>
       <div class="login-navbar">
-        <button type="button" class="login-item btn btn-primary" (click)="googleSignIn()">
+        <button type="button" class="login-item btn btn-primary" (click)="googleSignIn()" disabled>
           <h3><i class="bi bi-google"></i></h3>
         </button>
-        <button type="button" class="login-item btn btn-primary" (click)="githubSignIn()">
+        <button type="button" class="login-item btn btn-primary" (click)="githubSignIn()" disabled>
           <h3><i class="bi bi-github"></i></h3>
         </button>
       </div>

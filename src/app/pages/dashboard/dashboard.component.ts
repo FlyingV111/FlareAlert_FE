@@ -13,6 +13,6 @@ import {RecentActivityComponent} from './components/recent-activity/recent-activ
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent{
 
 }

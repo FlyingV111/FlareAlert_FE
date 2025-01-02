@@ -8,21 +8,13 @@ import {AuthService} from './services/auth/authService/auth.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  private authService = inject(AuthService)
+  protected title = 'FlareAlert';
+  protected authService = inject(AuthService)
   protected isSiteLoading = signal(false)
-  protected isLoggedIn = signal(false)
 
   constructor() {
-    effect(() => {
-      this.authService.isLoggedIn$.subscribe((loggedIn) => {
-        this.isLoggedIn.set(loggedIn)
-      })
-    });
-
     effect(() => {
       this.isSiteLoading.set(this.authService.isSiteLoading())
     });
   }
-
-  title = 'FlareAlert';
 }

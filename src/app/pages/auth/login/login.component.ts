@@ -25,6 +25,7 @@ export class LoginComponent {
 
   constructor(public authService: AuthService, private fb: FormBuilder) {
     this.signInForm = this.fb.group({
+      userNameLogin: ['', Validators.required],
       userEmailLogin: [
         '',
         [
@@ -34,6 +35,11 @@ export class LoginComponent {
       ],
       userPasswordLogin: ['', Validators.required],
     });
+  }
+
+  get userName(): string {
+    const userNameControl = this.signInForm.get('userNameLogin');
+    return userNameControl ? userNameControl.value : '';
   }
 
   get userEmail(): string {
@@ -50,15 +56,15 @@ export class LoginComponent {
   signIn() {
     this.isFormSubmitted = true;
     if (this.signInForm.valid) {
-      this.authService.login(this.userEmail, this.userPassword)
+      this.authService.login(this.userEmail, this.userEmail, this.userPassword)
     }
   }
 
   async googleSignIn() {
-    await this.authService.googleAuth()
+    // await this.authService.googleAuth()
   }
 
   async githubSignIn() {
-    await this.authService.githubAuth()
+    // await this.authService.githubAuth()
   }
 }
