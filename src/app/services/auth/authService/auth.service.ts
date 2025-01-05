@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {TokenResponse} from '../../../models/auth/TokenResponse';
-import {User} from '../../../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +13,20 @@ export class AuthService {
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
   isSiteLoading = signal<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   login(username: string, email: string, password: string): void {
     this.isSiteLoading.set(true);
     this.http.post<TokenResponse>(`${this.backendAuthUrl}/login`, {username, email, password}).subscribe({
       next: (response) => {
-        try {
-          localStorage.setItem(this.TOKEN_KEY, response.accessToken);
-          localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
-        } catch (e) {
-          console.error(e)
+        if (response) {
+          try {
+            localStorage.setItem(this.TOKEN_KEY, response.accessToken);
+            localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
+          } catch (e) {
+            console.error(e)
+          }
         }
       },
       error: (error) => {

@@ -19,6 +19,13 @@
   --secondary-text-color: #9CA3AF;
   --text-color: #ffffff;
 
+  --btn-dark-background: transparent;
+  --btn-dark-border: transparent;
+  --btn-dark-hover-background: #374151;
+  --btn-dark-hover-border: #374151;
+  --btn-dark-active-background: #1A2332;
+  --btn-dark-active-border: #1A2332;
+  --btn-dark-disabled-background: #1A2332;
   a {
     color: var(--accent-color);
   }
@@ -49,12 +56,46 @@
     --bs-btn-disabled-border-color: var(--accent-bg-color);
   }
 
+  .btn-dark {
+    --bs-btn-bg: var(--btn-dark-background);
+    --bs-btn-border-color: var(--border-color);
+    --bs-btn-hover-bg: var(--btn-dark-hover-background);
+    --bs-btn-hover-border-color: var(--btn-dark-hover-border);
+    --bs-btn-active-bg: var(--btn-dark-active-background);
+    --bs-btn-active-border-color: var(--btn-dark-active-border);
+    --bs-btn-disabled-bg: var(--btn-dark-disabled-background);
+    --bs-btn-disabled-border-color: var(--btn-dark-disabled-background);
+  }
+
+  .form-switch .form-check-input{
+    padding: .5rem;
+    width: 2.5rem;
+    margin-right: .5rem;
+  }
+
+  .form-switch .form-check-input:focus {
+    border-color: var(--accent-color);
+    outline: 0;
+    box-shadow: 0 0 0 0 var(--accent-color);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(89,92,95,1.0)'/></svg>");
+  }
+
+  .form-switch .form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+  }
+
 
   .card {
     position: static !important;
     background-color: var(--card-bg-color) !important;
     border: none !important;
     border-radius: .8rem !important;
+  }
+
+  .card-body{
+    padding: 1.5rem !important;
   }
 
   .card-border {

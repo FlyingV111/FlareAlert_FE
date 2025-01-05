@@ -9,16 +9,20 @@ import {FormsModule} from '@angular/forms';
 import {
   Bell,
   BellRing,
+  Cable,
   Clock,
+  Copy,
   Eye,
   EyeOff,
   Home,
   ImageUp,
+  Key,
   KeySquare,
   LucideAngularModule,
   Mail,
   MapPin,
   MessageSquareWarning,
+  RefreshCcw,
   TriangleAlert,
   User,
   Users
@@ -35,9 +39,6 @@ import {CanvasRenderer} from 'echarts/renderers';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthInterceptor} from './services/auth/authInterceptor/authInterceptor';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFireModule} from '@angular/fire/compat';
-import {environment} from '../environments/environment';
 
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
@@ -52,9 +53,9 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     CommonModule,
     FormsModule,
     LucideAngularModule.pick({
-      TriangleAlert, ImageUp, User, Eye, EyeOff,
-      Bell, Home, MessageSquareWarning, MapPin,
-      Clock, Users, BellRing, Mail, KeySquare
+      TriangleAlert, ImageUp, User, Eye, EyeOff, RefreshCcw,
+      Bell, Home, MessageSquareWarning, MapPin, Key, Copy,
+      Clock, Users, BellRing, Mail, KeySquare, Cable
     }),
     NgxEchartsModule,
     RouterOutlet,

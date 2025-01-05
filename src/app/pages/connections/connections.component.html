@@ -1,0 +1,46 @@
+<main>
+  <header class="site-description-container">
+    <div class="description">
+      <h3>Webhook Endpoint</h3>
+      <p class="text-secondary">Configure and mange your webhook endpoint for real-time alert notifications</p>
+    </div>
+    <div class="form-check form-switch custom-switch">
+      <input class="form-check-input" type="checkbox" id="webhookEnabledLabel">
+      <label class="form-check-label" for="webhookEnabledLabel"><h5>Enabled</h5></label>
+    </div>
+  </header>
+  <div class="card-container">
+    <div class="card card-border card-body webhook-container">
+      <header>
+        <h5>Webhook URL</h5>
+        <p class="text-secondary">Use this webhook to send alert events to external systems.</p>
+      </header>
+      <div class="input-container">
+        <input type="text" class="form-control webhook-input" readonly>
+        <button type="button" class="btn btn-dark">
+          <lucide-icon name="copy" size="24"></lucide-icon>
+        </button>
+      </div>
+      <button type="button" class="btn btn-primary custom-btn">
+        <lucide-icon name="refresh-ccw" size="24"></lucide-icon>
+        <span>Regenerate Webhook</span>
+      </button>
+    </div>
+    <div class="card card-border card-body webhook-auth-container">
+      <header>
+        <h5>API Key Authentication</h5>
+        <p class="text-secondary">Secure your webhook endpoint with API key authentication.</p>
+      </header>
+      <div class="input-container">
+        <input type="password" class="form-control webhook-input" readonly>
+        <button type="button" class="btn btn-dark">
+          <lucide-icon name="copy" size="24"></lucide-icon>
+        </button>
+      </div>
+      <button type="button" class="btn btn-primary custom-btn">
+        <lucide-icon name="key" size="24"></lucide-icon>
+        <span>Regenerate API Key</span>
+      </button>
+    </div>
+  </div>
+</main>
