@@ -3,9 +3,9 @@
   <div class="modal-body custom-body">
     <div class="custom-header">
       <lucide-icon size="64" name="triangle-alert" color="var(--bs-danger)"></lucide-icon>
-      <h3><strong>{{ config.title ?? 'Are you sure?' }}</strong></h3>
+      <h3><strong>{{ config.title }}</strong></h3>
     </div>
-    <p>{{ config.message ?? 'This action cannot be undone. The Simulation will be lost' }}</p>
+    <p>{{ config.message }}</p>
     <div class="custom-footer">
       <button type="button" class="btn btn-dark" (click)="cancel()">{{ config.cancelText ?? 'Cancel' }}</button>
       <button type="button" class="btn btn-danger" (click)="confirm()">{{ config.confirmText ?? 'Confirm' }}</button>
