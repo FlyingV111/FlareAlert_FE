@@ -15,7 +15,7 @@ export class AlertService {
     this.linkElement = document.querySelector('link[rel="icon"]');
     this.requestNotificationPermission();
     this.alertSound = new Audio('assets/sounds/feuerwehreinsatz_2.mp3');
-    this.alertSound.volume = 0.5;
+    this.alertSound.volume = 1;
     this.alertSound.loop = true;
     this.alertSound.preload = 'auto';
   }
@@ -28,12 +28,12 @@ export class AlertService {
     }
 
     this.blinkInterval = window.setInterval(() => {
-      document.title = (document.title === this.originalTitle) ? "Ulert!" : this.originalTitle;
+      document.title = (document.title === this.originalTitle) ? "Alert!" : this.originalTitle;
     }, 1000);
 
     this.sendDesktopNotification(
-      'Ulert!',
-      'A Ulert has been triggered and is currently active',
+      'Alert!',
+      'A Alert has been triggered and is currently active',
     );
     this.playAlertSound();
     this.switchIcon(this.alertIconLink);

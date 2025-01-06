@@ -2,13 +2,16 @@
   <header class="site-description-container">
     <div class="description">
       <h3>Webhook Endpoint</h3>
-      <p class="text-secondary">Configure and mange your webhook endpoint for real-time alert notifications</p>
+      <p class="text-secondary">Configure and manage your webhook endpoint for real-time alert notifications</p>
     </div>
     <div class="form-check form-switch custom-switch">
-      <input class="form-check-input" type="checkbox" id="webhookEnabledLabel">
+      <input class="form-check-input" type="checkbox" id="webhookEnabledLabel"
+             [checked]="isWebhookEnabled" (change)="toggleWebhook()">
+
       <label class="form-check-label" for="webhookEnabledLabel"><h5>Enabled</h5></label>
     </div>
   </header>
+
   <div class="card-container">
     <div class="card card-border card-body webhook-container">
       <header>
@@ -16,29 +19,71 @@
         <p class="text-secondary">Use this webhook to send alert events to external systems.</p>
       </header>
       <div class="input-container">
-        <input type="text" class="form-control webhook-input" readonly>
-        <button type="button" class="btn btn-dark">
+        <input
+          type="text"
+          class="form-control webhook-input"
+          [value]="(loadingWebhookUrl() || !webhook()?.webhookUrl) ? 'Loading...' : webhook()?.webhookUrl"
+          readonly
+          [disabled]="(loadingWebhookUrl() || !webhook()?.webhookUrl) "
+        />
+        <button
+          type="button"
+          class="btn btn-dark"
+          [disabled]="(loadingWebhookUrl() || !webhook()?.webhookUrl) "
+          (click)="copyField(webhook()?.webhookUrl)"
+        >
           <lucide-icon name="copy" size="24"></lucide-icon>
         </button>
+
       </div>
-      <button type="button" class="btn btn-primary custom-btn">
-        <lucide-icon name="refresh-ccw" size="24"></lucide-icon>
+      <button
+        type="button"
+        class="btn btn-primary custom-btn"
+        [disabled]="loadingWebhookUrl()"
+        (click)="generateWebhookUrl()"
+      >
+        @if (loadingWebhookUrl()) {
+          <div class="spinner-border spinner-border-sm" role="status"></div>
+        } @else {
+          <lucide-icon name="refresh-ccw" size="24"/>
+        }
         <span>Regenerate Webhook</span>
       </button>
     </div>
+
     <div class="card card-border card-body webhook-auth-container">
       <header>
         <h5>API Key Authentication</h5>
         <p class="text-secondary">Secure your webhook endpoint with API key authentication.</p>
       </header>
       <div class="input-container">
-        <input type="password" class="form-control webhook-input" readonly>
-        <button type="button" class="btn btn-dark">
+        <input
+          type="password"
+          class="form-control webhook-input"
+          [value]="(loadingApiKey() || !webhook()?.apiKey) ? 'Loading...' : webhook()?.apiKey"
+          readonly
+          [disabled]="(loadingApiKey() || !webhook()?.apiKey)"
+        />
+        <button
+          type="button"
+          class="btn btn-dark"
+          [disabled]="(loadingApiKey() || !webhook()?.apiKey)"
+          (click)="copyField(webhook()?.apiKey)"
+        >
           <lucide-icon name="copy" size="24"></lucide-icon>
         </button>
       </div>
-      <button type="button" class="btn btn-primary custom-btn">
-        <lucide-icon name="key" size="24"></lucide-icon>
+      <button
+        type="button"
+        class="btn btn-primary custom-btn"
+        [disabled]="loadingApiKey()"
+        (click)="generateApiKey()"
+      >
+        @if (loadingApiKey()) {
+          <div *ngIf="loadingApiKey()" class="spinner-border spinner-border-sm" role="status"></div>
+        } @else {
+          <lucide-icon name="key" size="24"/>
+        }
         <span>Regenerate API Key</span>
       </button>
     </div>

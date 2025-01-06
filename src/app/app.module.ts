@@ -39,6 +39,7 @@ import {CanvasRenderer} from 'echarts/renderers';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthInterceptor} from './services/auth/authInterceptor/authInterceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
@@ -62,6 +63,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     SideNavComponent,
     TopNavComponent,
     NgxEchartsModule.forRoot({echarts}),
+    NgbModule,
   ],
   providers: [
     DatePipe,
