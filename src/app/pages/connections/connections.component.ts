@@ -1,27 +1,27 @@
-import {Component, computed, effect, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {LucideAngularModule} from 'lucide-angular';
 import {Webhook} from '../../models/Webhook';
 import {ConnectionService} from '../../services/connection-service/connection.service';
 import {User} from '../../models/User';
 import {UserService} from '../../services/user-service/user.service';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {
-  ConfirmationDialogConfig,
-  ConfirmDialogComponent
-} from '../../shared/ConfirmDialog/ConfirmDialog.component';
+import {ConfirmDialogComponent} from '../../shared/ConfirmDialog/ConfirmDialog.component';
 
 @Component({
   selector: 'app-connections',
   imports: [
     LucideAngularModule,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'
 })
 export class ConnectionsComponent {
   private userService = inject(UserService);
+  protected copiedUrl: boolean = false;
+  protected copiedAuth: boolean = false;
   protected connectionService = inject(ConnectionService);
   protected webhook = signal<Webhook | null>(null)
   protected user = signal<User | null>(null)
@@ -66,10 +66,22 @@ export class ConnectionsComponent {
     }
   }
 
-  copyField(data: string | undefined) {
-    if (data) {
-      navigator.clipboard.writeText(data).then();
-    }
+  copyWebhookUrl(value?: string) {
+    navigator.clipboard.writeText(value ?? '').then(() => {
+      this.copiedUrl = true;
+      setTimeout(() => {
+        this.copiedUrl = false;
+      }, 3000);
+    });
+  }
+
+  copyApiKey(value?: string) {
+    navigator.clipboard.writeText(value ?? '').then(() => {
+      this.copiedAuth = true;
+      setTimeout(() => {
+        this.copiedAuth = false;
+      }, 3000);
+    });
   }
 
   generateWebhookUrl() {

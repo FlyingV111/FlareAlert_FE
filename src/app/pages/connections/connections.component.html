@@ -11,9 +11,8 @@
       <label class="form-check-label" for="webhookEnabledLabel"><h5>Enabled</h5></label>
     </div>
   </header>
-
   <div class="card-container">
-    <div class="card card-border card-body webhook-container">
+    <div class="card card-border card-body webhook-container" [ngClass]="{ 'copiedUrl': copiedUrl }">
       <header>
         <h5>Webhook URL</h5>
         <p class="text-secondary">Use this webhook to send alert events to external systems.</p>
@@ -30,7 +29,7 @@
           type="button"
           class="btn btn-dark"
           [disabled]="(loadingWebhookUrl() || !webhook()?.webhookUrl) "
-          (click)="copyField(webhook()?.webhookUrl)"
+          (click)="copyWebhookUrl(webhook()?.webhookUrl)"
         >
           <lucide-icon name="copy" size="24"></lucide-icon>
         </button>
@@ -51,7 +50,7 @@
       </button>
     </div>
 
-    <div class="card card-border card-body webhook-auth-container">
+    <div class="card card-border card-body webhook-auth-container" [ngClass]="{ 'copiedAuth': copiedAuth }">
       <header>
         <h5>API Key Authentication</h5>
         <p class="text-secondary">Secure your webhook endpoint with API key authentication.</p>
@@ -68,7 +67,7 @@
           type="button"
           class="btn btn-dark"
           [disabled]="(loadingApiKey() || !webhook()?.apiKey)"
-          (click)="copyField(webhook()?.apiKey)"
+          (click)="copyApiKey(webhook()?.apiKey)"
         >
           <lucide-icon name="copy" size="24"></lucide-icon>
         </button>
