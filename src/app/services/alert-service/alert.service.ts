@@ -1,9 +1,14 @@
-import {Injectable, OnInit, signal} from '@angular/core';
+import {inject, Injectable, OnInit, signal} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {AuthService} from '../auth/authService/auth.service';
+import {UserService} from '../user-service/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
+  private backendUrl = environment.backendAuthUrl
+  private userService = inject(UserService)
   private originalTitle = "FlareAlert";
   private readonly linkElement: HTMLLinkElement | null;
   private readonly alertIconLink: string = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjAwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS10cmlhbmdsZS1hbGVydCI+PHBhdGggZD0ibTIxLjczIDE4LTgtMTRhMiAyIDAgMCAwLTMuNDggMGwtOCAxNEEyIDIgMCAwIDAgNCAyMWgxNmEyIDIgMCAwIDAgMS43My0zIi8+PHBhdGggZD0iTTEyIDl2NCIvPjxwYXRoIGQ9Ik0xMiAxN2guMDEiLz48L3N2Zz4=";
@@ -20,6 +25,25 @@ export class AlertService {
     this.alertSound.preload = 'auto';
   }
 
+  connect() {
+    const user = this.userService.user();
+    if (!user)
+      return;
+    const eventSource = new EventSource(this.backendUrl + '/alert/stream/' + user.id,);
+
+    eventSource.onopen = function (event) {
+      console.log('Connection opened');
+    };
+
+    eventSource.onmessage = (event) => {
+      console.log("Event:", event);
+      this.startAlert()
+    }
+
+    eventSource.onerror = function (error) {
+      console.error('Error occurred: ', error);
+    };
+  }
 
   startAlert() {
     const alertRoot = document.getElementById('alert-root');
@@ -78,6 +102,8 @@ export class AlertService {
       notification.onclick = () => {
         window.focus();
       };
+
+      this.playAlertSound()
     }
   }
 
