@@ -1,19 +1,33 @@
-import {Injectable, signal} from '@angular/core';
+import {effect, inject, Injectable, signal} from '@angular/core';
 import {getCssVariableValue} from '../../app.module';
+import {AlertService} from '../alert/alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmergencyHistoryChartService {
-  constructor() {}
-
+  private alertService = inject(AlertService)
+  private monthlyAlertData = signal<number[] | null>(null)
   chartOptions = signal(this.getDefaultChartOptionsEcharts());
+
+  constructor() {
+    effect(() => {
+      this.monthlyAlertData = this.alertService.monthlyAlertData;
+      this.chartOptions.set(this.getDefaultChartOptionsEcharts());
+    });
+  }
 
   getDefaultChartOptionsEcharts(min: number = 0, max: number = 5) {
     const months = [
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
+
+    const dataLength = this.monthlyAlertData()?.length;
+
+    if ((dataLength ?? 0) > max) {
+      max = (dataLength ?? max) + 2;
+    }
 
     return {
       xAxis: {
@@ -37,12 +51,11 @@ export class EmergencyHistoryChartService {
       darkMode: true,
       series: [
         {
-          data: [],
-          type: 'line',
+          data: this.monthlyAlertData(),
+          type: 'bar',
           smooth: true,
-          lineStyle: {
+          itemStyle: {
             color: getCssVariableValue('--accent-color'),
-            width: 3
           },
           symbol: 'none',
         }

@@ -1,9 +1,10 @@
-import {Component, computed, effect, signal} from '@angular/core';
+import {Component, computed, effect, inject} from '@angular/core';
 import {
   EmergencyHistoryChartService
 } from '../../../../services/emergency-history-chart/emergency-history-chart.service';
 import {NgxEchartsDirective, provideEchartsCore} from 'ngx-echarts';
 import {echarts} from '../../../../../echartsConfig/echart-config';
+import {AlertService} from '../../../../services/alert/alert.service';
 
 
 @Component({
@@ -19,12 +20,17 @@ import {echarts} from '../../../../../echartsConfig/echart-config';
   ]
 })
 export class EmergencyHistoryChartComponent {
-  loading: boolean = false;
+  private alertService = inject(AlertService)
+  protected loading: boolean = false;
   protected chartOptions = computed(() => this.emergencyHistoryChartService.chartOptions());
 
   constructor(private emergencyHistoryChartService: EmergencyHistoryChartService) {
     effect(() => {
       this.chartOptions = this.emergencyHistoryChartService.chartOptions;
+    });
+
+    effect(() => {
+      this.alertService.getMonthlyAmounts()
     });
   }
 }

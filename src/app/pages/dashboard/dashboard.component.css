@@ -12,7 +12,7 @@ main {
   display: grid;
   grid-template-columns: 4fr minmax(300px, 1fr);
   gap: 1.5rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .col1,
@@ -25,7 +25,7 @@ main {
 .col1 {
   grid-column: span 1;
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  /*grid-template-rows: 2fr 1fr;*/
 }
 
 .col2 {

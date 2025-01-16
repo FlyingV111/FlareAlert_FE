@@ -22,15 +22,15 @@ import {
   Mail,
   MapPin,
   MessageSquareWarning,
-  RefreshCcw,
+  RefreshCcw, Save,
   TriangleAlert,
   User,
-  Users
+  Users, X
 } from 'lucide-angular';
 import {RouterOutlet} from '@angular/router';
 import {AppRoutingModule} from './app.routes';
-import {SideNavComponent} from './pages/navigation/side-nav/side-nav.component';
-import {TopNavComponent} from './pages/navigation/top-nav/top-nav.component';
+import {SideNavComponent} from './shared/navigation/side-nav/side-nav.component';
+import {TopNavComponent} from './shared/navigation/top-nav/top-nav.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import * as echarts from 'echarts/core';
 import {BarChart} from 'echarts/charts';
@@ -56,7 +56,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     LucideAngularModule.pick({
       TriangleAlert, ImageUp, User, Eye, EyeOff, RefreshCcw,
       Bell, Home, MessageSquareWarning, MapPin, Key, Copy,
-      Clock, Users, BellRing, Mail, KeySquare, Cable
+      Clock, Users, BellRing, Mail, KeySquare, Cable, Save, X
     }),
     NgxEchartsModule,
     RouterOutlet,
