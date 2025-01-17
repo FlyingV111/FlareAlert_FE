@@ -1,0 +1,95 @@
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.site-description-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-description-container .description h3 {
+  margin-bottom: .5rem;
+}
+
+.user-assignment,
+.email-test,
+.template-editor-container {
+  width: 100%;
+  height: 100%;
+}
+
+.template-settings,
+.text-editor,
+.template-editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.template-editor-container{
+  display: grid;
+  grid-template-columns: 1fr .3fr;
+  gap: 1.5rem;
+}
+
+.template-editor-container .template-editor textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+
+.template-settings .assignment-container{
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.assignment-container .user-assignment {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.assignment-container .assigned-users-list{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.assignment-container .assigned-user-item {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  gap: .5rem;
+}
+
+.user-assignment .select-content .group{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-assignment .select-content .group .add-user-btn{
+  white-space: nowrap;
+}
