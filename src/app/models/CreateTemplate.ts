@@ -1,9 +1,7 @@
-import {UserSearchResult} from './User';
-
 export type CreateTemplate = {
   templateName: string;
   templateContent: string;
-  assignedUsers: UserSearchResult[];
+  assignedUsersEmails: string[];
 }
 
 export interface NotificationTemplate extends CreateTemplate {

@@ -152,6 +152,34 @@
   h1, h2, h3, h4, h5, h6, span, p {
     margin: 0;
   }
+
+  .btn-outline-primary{
+    --bs-btn-color: var(--accent-color);
+    --bs-btn-border-color: var(--accent-color);
+
+    --bs-btn-active-color: var(--text-color);
+    --bs-btn-active-bg: var(--accent-color);
+    --bs-btn-active-border-color: var(--accent-color);
+  }
+
+  .btn-primary-select{
+    --bs-btn-color: var(--secondary-text-color);
+    --bs-btn-border-color: var(--border-color);
+    --bs-btn-bg: var(--border-color);
+
+    --bs-btn-active-color: var(--text-color);
+    --bs-btn-active-bg: var(--accent-color);
+    --bs-btn-active-border-color: var(--accent-color);
+  }
+
+  .text-bg-primary {
+    background: var(--accent-color) !important;
+  }
+
+  .form-select{
+    --bs-body-color: var(--text-color);
+    --bs-body-bg: var(--input-bg-color);
+  }
 }
 
 

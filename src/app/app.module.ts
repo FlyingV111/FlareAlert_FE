@@ -21,8 +21,8 @@ import {
   LucideAngularModule,
   Mail,
   MapPin,
-  MessageSquareWarning,
-  RefreshCcw, Save,
+  MessageSquareWarning, Plus,
+  RefreshCcw, Save, Trash2,
   TriangleAlert,
   User,
   Users, X
@@ -55,8 +55,8 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     FormsModule,
     LucideAngularModule.pick({
       TriangleAlert, ImageUp, User, Eye, EyeOff, RefreshCcw,
-      Bell, Home, MessageSquareWarning, MapPin, Key, Copy,
-      Clock, Users, BellRing, Mail, KeySquare, Cable, Save, X
+      Bell, Home, MessageSquareWarning, MapPin, Key, Copy, Plus,
+      Clock, Users, BellRing, Mail, KeySquare, Cable, Save, X, Trash2
     }),
     NgxEchartsModule,
     RouterOutlet,

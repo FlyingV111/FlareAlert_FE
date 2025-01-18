@@ -1,0 +1,25 @@
+<div class="template-editor card card-body">
+  <h5>Edit Template</h5>
+  <form [formGroup]="templateForm" class="text-editor">
+    <div class="template-name-container">
+      <label for="template-name">Template Name</label>
+      <input
+        id="template-name"
+        type="text"
+        class="form-control"
+        placeholder="..."
+        formControlName="templateName"
+      >
+    </div>
+    <div class="template-content-container">
+      <label for="template-content">Template Content</label>
+      <textarea
+        id="template-content"
+        class="form-control"
+        rows="5"
+        placeholder="..."
+        formControlName="templateContent"
+      ></textarea>
+    </div>
+  </form>
+</div>

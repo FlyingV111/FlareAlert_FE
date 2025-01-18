@@ -6,76 +6,7 @@
     </div>
   </header>
   <div class="template-editor-container">
-    <div class="template-editor card card-body">
-      <h5>Email Template Editor</h5>
-      <form [formGroup]="templateForm" class="text-editor" (ngSubmit)="saveTemplate()">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Template Name..."
-          formControlName="templateName"
-        >
-        <textarea
-          class="form-control"
-          rows="5"
-          placeholder="Enter your email template content here..."
-          formControlName="templateContent"
-        ></textarea>
-        <div class="mt-2 d-flex justify-content-end">
-          <button class="btn btn-secondary me-3">
-            <lucide-icon name="copy"></lucide-icon>
-            <span>Copy</span>
-          </button>
-          <button class="btn btn-primary" type="submit" [disabled]="!isTemplateNameValid">
-            <lucide-icon name="save"></lucide-icon>
-            <span>Save Template</span>
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="template-settings card card-body">
-      <div class="assignment-container">
-        <h5>Template Settings</h5>
-        <div class="user-assignment">
-          <div class="select-content">
-            <label for="typeahead-template" class="col-xs-3 col-sm-auto col-form-label">Search for a User:</label>
-            <div class="group">
-              <input
-                id="typeahead-template"
-                type="text"
-                class="form-control"
-                [(ngModel)]="userSearchResult"
-                [ngbTypeahead]="searchUsers"
-                [resultTemplate]="rt"
-                [inputFormatter]="formatter"
-                (ngModelChange)="invalidUser = $event"
-              />
-              <button class="btn btn-primary add-user-btn" (click)="addUser()" [disabled]="isAddUserDisabled">
-                Add User
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="assigned-users-list">
-          <div *ngFor="let user of assignedUsers" class="badge rounded-pill text-bg-primary assigned-user-item">
-            {{user.email }}
-            <a (click)="removeUserFromAssigned(user)">
-              <lucide-icon name="x" size="20"></lucide-icon>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <template-editor></template-editor>
+    <template-settings></template-settings>
   </div>
 </main>
-
-<ng-template #rt let-r="result" let-t="term">
-  <div class="user-info">
-    <div class="user-info-content">
-      <ngb-highlight [result]="r.username" [term]="t"></ngb-highlight>
-      <span> (</span>
-      <ngb-highlight [result]="r.email" [term]="t"></ngb-highlight>
-      <span>)</span>
-    </div>
-  </div>
-</ng-template>
