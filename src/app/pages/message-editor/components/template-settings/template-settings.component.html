@@ -1,21 +1,37 @@
 <section class="card">
-  <form class="template-settings">
-    <div class="recipients-form">
+  <div class="template-settings">
+    <form class="recipients-form" [formGroup]="settingsForm">
       <h5>Recipients List</h5>
       <div class="recipients-container">
         <div class="recipients-assignment">
           <label for="typeahead-template">Add Recipients</label>
           <div class="recipients-input-container">
-            <input id="typeahead-template" type="email" class="form-control" [formControl]="userSearchControl"
-                   placeholder="Add Email..."/>
-            <button class="btn btn-primary add-user-btn" (click)="addUser()" [disabled]="isAddUserDisabled">
+            <input
+              id="typeahead-template"
+              type="email"
+              class="form-control"
+              placeholder="Add Email..."
+              formControlName="recipientEmail"
+            />
+            <button
+              class="btn btn-primary add-user-btn"
+              (click)="addUser()"
+              [disabled]="isAddUserDisabled"
+              type="button"
+            >
               <lucide-icon name="plus"></lucide-icon>
             </button>
           </div>
         </div>
-        <div class="recipients-assignment-list" [class.no-user]="assignedUsersEmails.length == 0">
+        <div
+          class="recipients-assignment-list"
+          [class.no-user]="assignedUsersEmails.length == 0"
+        >
           <span *ngIf="assignedUsersEmails.length == 0">No recipients assigned</span>
-          <div *ngFor="let email of assignedUsersEmails" class="badge rounded-pill text-bg-primary assigned-user-item">
+          <div
+            *ngFor="let email of assignedUsersEmails"
+            class="badge rounded-pill text-bg-secondary assigned-user-item"
+          >
             {{ email }}
             <a (click)="removeUserFromAssigned(email)">
               <lucide-icon name="x" size="20"></lucide-icon>
@@ -23,63 +39,114 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="schedule-form" [formGroup]="scheduleFrom">
+    </form>
+    <form class="schedule-form" [formGroup]="settingsForm">
       <h5>Schedule Settings</h5>
       <div class="schedule-container">
         <div class="schedule-assignment-container">
           <label for="schedule-assignment">Default Schedule</label>
           <div class="schedule-assignment" id="schedule-assignment">
             <div *ngFor="let day of days">
-              <input type="checkbox" class="btn-check" id="btn-{{day.name}}" [checked]="day.active"
-                     (change)="toggleDay(day)">
-              <label class="btn btn-primary-select" for="btn-{{day.name}}">{{ day.name }}</label><br>
+              <input
+                type="checkbox"
+                class="btn-check"
+                [id]="'btn-' + day.name"
+                [checked]="day.active"
+                (change)="toggleDay(day)"
+              />
+              <label class="btn btn-primary-select" [for]="'btn-' + day.name">{{ day.name }}</label>
+              <br/>
             </div>
           </div>
         </div>
         <div class="default-time-container">
           <div class="time-item">
             <label for="start-time">Start Time</label>
-            <input id="start-time" type="time" class="form-control" formControlName="startTime">
+            <input
+              id="start-time"
+              type="time"
+              class="form-control"
+              formControlName="startTime"
+              (change)="updateDayTimes()"
+            />
           </div>
           <div class="time-item">
             <label for="end-time">End Time</label>
-            <input id="end-time" type="time" class="form-control" formControlName="endTime">
+            <input
+              id="end-time"
+              type="time"
+              class="form-control"
+              formControlName="endTime"
+              (change)="updateDayTimes()"
+            />
           </div>
         </div>
         <div class="schedule-overview-container">
           <label for="schedule-overview-id">Schedule Overview</label>
           <div id="schedule-overview-id" class="schedule-overview">
-            <div class="schedule-overview-item" [class.active]="day.active" *ngFor="let day of days">
+            <div
+              class="schedule-overview-item"
+              [class.active]="day.active"
+              *ngFor="let day of days"
+            >
               <p><b>{{ day.name }}</b></p>
-              <p class="text-secondary" *ngIf="day.startTime && day.endTime">{{ day.startTime}}-{{day.endTime}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="exceptions-container">
-          <div class="nav">
-            <label for="exceptions-id">Exceptions</label>
-            <button class="btn btn-primary add-exception-btn"
-                    (click)="addException()">
-              <lucide-icon name="plus" size="16"></lucide-icon>
-              Add Exception
-            </button>
-          </div>
-          <div id="exceptions-id" class="exceptions" [class.no-exceptions]="exceptions.length == 0">
-            <span *ngIf="exceptions.length == 0">No exceptions created</span>
-            <div class="exception-item card secondary-card" *ngFor="let exception of exceptions">
-              <select class="form-select" formControlName="exceptionSelectedDay">
-                <option *ngFor="let day of days" value="{{day.name}}">{{ day.name }}</option>
-              </select>
-              <input type="time" class="form-control" formControlName="exceptionStartTime">
-              <input type="time" class="form-control" formControlName="exceptionEndTime">
-              <button class="btn btn-dark btn-delete" (click)="removeException(exception)">
-                <lucide-icon color="var(--secondary-text-color)" name="trash-2"></lucide-icon>
-              </button>
+              <p class="text-secondary" *ngIf="day.active">
+                {{ convertUnixToTime(day.startTime)}} - {{ convertUnixToTime(day.endTime) }}
+              </p>
             </div>
           </div>
         </div>
       </div>
+    </form>
+    <div class="exceptions-from">
+      <div class="nav">
+        <h5>Exceptions</h5>
+        <button
+          class="btn btn-secondary add-exception-btn"
+          (click)="addException()"
+          type="button"
+        >
+          <lucide-icon name="plus" size="16"></lucide-icon>
+          Add Exception
+        </button>
+      </div>
+      <div id="exceptions-id" [formGroup]="exceptionsForm" *ngIf="exceptionArray.controls.length > 0">
+        <div class="exceptions" formArrayName="exceptions">
+          <div
+            class="exception-item card secondary-card"
+            *ngFor="let exception of exceptionArray.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <select
+              class="form-select"
+              formControlName="selectedDay"
+              (change)="onExceptionDayChange(i)"
+            >
+              <option value="" disabled>-- Select Day --</option>
+              <option *ngFor="let day of days" [value]="day.name">
+                {{ day.name }}
+              </option>
+            </select>
+            <input
+              type="time"
+              class="form-control"
+              formControlName="exceptionStartTime"
+            />
+            <input
+              type="time"
+              class="form-control"
+              formControlName="exceptionEndTime"
+            />
+            <button
+              class="btn btn-dark btn-delete"
+              (click)="removeException(i)"
+              type="button"
+            >
+              <lucide-icon color="var(--secondary-text-color)" name="trash-2"></lucide-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
 </section>

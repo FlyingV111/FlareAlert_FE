@@ -2,8 +2,13 @@ import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {LucideAngularModule} from 'lucide-angular';
 import {TemplateService} from '../../services/templateService/template.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NotificationTemplate} from '../../models/CreateTemplate';
-import {ActivatedRoute, Router} from '@angular/router';
+import {
+  CreateTemplate,
+  NotificationTemplate,
+  NotificationTemplateSettings,
+  Template
+} from '../../models/CreateTemplate';
+import {ActivatedRoute} from '@angular/router';
 import {TemplateEditorComponent} from './components/template-editor/template-editor.component';
 import {TemplateSettingsComponent} from './components/template-settings/template-settings.component';
 
@@ -20,19 +25,17 @@ import {TemplateSettingsComponent} from './components/template-settings/template
   styleUrl: './message-editor.component.css'
 })
 export class MessageEditorComponent implements OnInit {
-  protected currentTemplate = signal<NotificationTemplate | null>(null)
   private templateService = inject(TemplateService)
-  private router = inject(Router)
   private route = inject(ActivatedRoute)
+  protected currentTemplate = signal<NotificationTemplate | null>(null)
+  private templateSettingsValues = signal<NotificationTemplateSettings | null>(null)
+  private templateValues = signal<Template | null>(null)
+  private isTemplateFormValid = false;
+  private isSettingsFormValid = false;
 
   constructor() {
-
-
     effect(() => {
       this.currentTemplate = this.templateService.currentTemplate
-      // this.assignedUsersEmails = this.currentTemplate()?.assignedUsersEmails || [];
-      // this.templateForm.get('templateName')?.setValue(this.currentTemplate()?.templateName);
-      // this.templateForm.get('templateContent')?.setValue(this.currentTemplate()?.templateContent);
     });
   }
 
@@ -40,8 +43,25 @@ export class MessageEditorComponent implements OnInit {
     this.getTemplate()
   }
 
+  protected onTemplateSettingsValuesChanged(values: NotificationTemplateSettings) {
+    this.templateSettingsValues.set(values);
+  }
 
+  protected onTemplateValuesChanged(template: Template) {
+    this.templateValues.set(template)
+  }
 
+  protected updateTemplateFormValidity(isValid: boolean): void {
+    this.isTemplateFormValid = isValid;
+  }
+
+  protected updateSettingsFormValidity(isValid: boolean): void {
+    this.isSettingsFormValid = isValid;
+  }
+
+  protected isSaveDisabled(): boolean {
+    return !(this.isTemplateFormValid && this.isSettingsFormValid);
+  }
 
   protected getTemplate() {
     const templateName = this.route.snapshot.queryParamMap.get('templateName');
@@ -50,16 +70,14 @@ export class MessageEditorComponent implements OnInit {
     }
   }
 
-  // protected saveTemplate() {
-  //   if (this.templateForm.valid) {
-  //     const formData: CreateTemplate = this.templateForm.value;
-  //     formData.assignedUsersEmails = this.assignedUsersEmails;
-  //     this.templateService.saveTemplate(formData)
-  //     this.router.navigate([], {
-  //       relativeTo: this.route,
-  //       queryParams: {templateName: formData.templateName},
-  //       queryParamsHandling: 'merge'
-  //     }).then()
-  //   }
-  // }
+  protected saveSettings() {
+    if (this.isTemplateFormValid && this.isSettingsFormValid) {
+      const createTemplateObject: CreateTemplate = {
+        notificationTemplateSettings: this.templateSettingsValues()!,
+        templateName: this.templateValues()!.templateName,
+        templateContent: this.templateValues()!.templateContent
+      }
+      this.templateService.saveTemplate(createTemplateObject);
+    }
+  }
 }

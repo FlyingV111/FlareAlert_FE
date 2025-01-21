@@ -6,7 +6,16 @@
     </div>
   </header>
   <div class="template-editor-container">
-    <template-editor></template-editor>
-    <template-settings></template-settings>
+    <template-editor
+      [template]="currentTemplate"
+      (onFormValidityChange)="updateTemplateFormValidity($event)"
+      (onTemplateValuesChanged)="onTemplateValuesChanged($event)">
+    </template-editor>
+    <template-settings
+      [template]="currentTemplate"
+      (onFormValidityChange)="updateSettingsFormValidity($event)"
+      (onSettingsChange)="onTemplateSettingsValuesChanged($event)">
+    </template-settings>
   </div>
+  <button class="btn btn-primary" [disabled]="isSaveDisabled()" (click)="saveSettings()">Save Settings</button>
 </main>

@@ -197,7 +197,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(55%) sepia(96%) saturate(4897%) hue-rotate(339deg) brightness(105%) contrast(88%);
+}
 main::before {
   content: "";
   position: fixed;

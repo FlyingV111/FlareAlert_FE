@@ -1,13 +1,13 @@
 export interface Day {
   name: string;
   active: boolean;
-  startTime: string;
-  endTime: string;
-  exceptions: Exception[];
+  startTime: number | null;
+  endTime: number | null;
+  dayExceptions: DayExceptions[];
 }
 
-export type Exception = {
+export type DayExceptions = {
   selectedDay: string;
-  exceptionStartTime: string;
-  exceptionEndTime: string;
+  exceptionStartTime: number;
+  exceptionEndTime: number;
 }

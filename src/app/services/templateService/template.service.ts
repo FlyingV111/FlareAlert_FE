@@ -17,7 +17,21 @@ export class TemplateService {
         this.currentTemplate.set(response);
       },
       error: (error) => {
-        console.error(error);
+        if (error.status === 409) {
+          const overwrite = confirm('Template already exists. Do you want to overwrite it?');
+          if (overwrite) {
+            this.http.put<NotificationTemplate>(`${this.backendUrl}/${template.templateName}`, template).subscribe({
+              next: (updateResponse) => {
+                this.currentTemplate.set(updateResponse);
+              },
+              error: (updateError) => {
+                console.error(updateError);
+              }
+            });
+          }
+        } else {
+          console.error(error);
+        }
       },
       complete: () => {
       },

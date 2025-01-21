@@ -39,7 +39,7 @@ import {CanvasRenderer} from 'echarts/renderers';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthInterceptor} from './services/auth/authInterceptor/authInterceptor';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
@@ -81,4 +81,34 @@ export class AppModule {
 
 export function getCssVariableValue(variable: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+}
+
+
+export function convertTimeToUnixTimestamp(time: string | number): number | null {
+  if (typeof time === 'number') {
+    return time;
+  }
+
+  if (!time) return null;
+
+  const [hours, minutes] = time.split(':').map(num => parseInt(num, 10));
+  const today = new Date();
+  today.setHours(hours, minutes, 0, 0);
+  return today.getTime() / 1000;
+}
+
+
+export function convertUnixToTime(unixTimestamp: number | null): string {
+  if (!unixTimestamp) return '';
+  const date = new Date(unixTimestamp * 1000);
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
+
+
+export function convertUnixToDate(timestamp: number | null): string {
+  if (!timestamp) return '';
+  const date = new Date(timestamp * 1000);
+  return date.toLocaleString();
 }
