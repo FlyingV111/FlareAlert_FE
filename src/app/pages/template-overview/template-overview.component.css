@@ -1,0 +1,41 @@
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.site-description-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.site-description-container h3 {
+  margin-bottom: .5rem;
+}
+
+.template-overview-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.template-overview-container .template-card{
+  width: 15rem;
+  height: 10rem;
+  border: 2px solid transparent !important;
+  transition: all .2s ease-in-out;
+}
+
+.template-overview-container .template-card:hover{
+  cursor: pointer;
+  border: 2px solid var(--accent-color) !important;
+}

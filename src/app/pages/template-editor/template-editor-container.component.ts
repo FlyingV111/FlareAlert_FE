@@ -9,8 +9,8 @@ import {
   Template
 } from '../../models/CreateTemplate';
 import {ActivatedRoute} from '@angular/router';
-import {TemplateEditorComponent} from './components/template-editor/template-editor.component';
 import {TemplateSettingsComponent} from './components/template-settings/template-settings.component';
+import {TemplateEditorComponent} from './components/template-editor/template-editor.component';
 
 @Component({
   selector: 'app-email-editor',
@@ -18,13 +18,13 @@ import {TemplateSettingsComponent} from './components/template-settings/template
     LucideAngularModule,
     FormsModule,
     ReactiveFormsModule,
-    TemplateEditorComponent,
-    TemplateSettingsComponent
+    TemplateSettingsComponent,
+    TemplateEditorComponent
   ],
-  templateUrl: './message-editor.component.html',
-  styleUrl: './message-editor.component.css'
+  templateUrl: './template-editor-container.component.html',
+  styleUrl: './template-editor-container.component.css'
 })
-export class MessageEditorComponent implements OnInit {
+export class TemplateEditorContainerComponent implements OnInit {
   private templateService = inject(TemplateService)
   private route = inject(ActivatedRoute)
   protected currentTemplate = signal<NotificationTemplate | null>(null)
