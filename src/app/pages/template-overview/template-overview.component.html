@@ -3,11 +3,19 @@
     <h3>Template Overview</h3>
     <p class="text-secondary">Easily manage and personalize your email templates to suit your needs.</p>
   </header>
-  <div class="template-overview-container">
-    <div class="template-card card secondary-card">
-      <div class="card-body">
-        <h5>Template 1</h5>
+  <div class="template-overview-container ">
+    <div class="template-card card card-body" *ngFor="let template of templates()">
+      <div class="content">
+        <h3>{{ template.templateName }}</h3>
+        <p>{{ template.templateDescription }}</p>
       </div>
+      <button class="btn btn-danger" (click)="deleteTemplate(template.templateName)">
+        <lucide-icon name="trash-2"></lucide-icon>
+      </button>
+    </div>
+    <div class="create-template-card card card-body" routerLink="/templates/editor">
+      <h4>New Template</h4>
+      <lucide-icon name="plus" size="32"></lucide-icon>
     </div>
   </div>
 </main>

@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {
   Bell,
   BellRing,
-  Cable,
+  Cable, ChevronLeft,
   Clock,
   Copy,
   Eye,
@@ -54,7 +54,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     CommonModule,
     FormsModule,
     LucideAngularModule.pick({
-      TriangleAlert, ImageUp, User, Eye, EyeOff, RefreshCcw,
+      TriangleAlert, ImageUp, User, Eye, EyeOff, RefreshCcw, ChevronLeft,
       Bell, Home, MessageSquareWarning, MapPin, Key, Copy, Plus,
       Clock, Users, BellRing, Mail, KeySquare, Cable, Save, X, Trash2
     }),

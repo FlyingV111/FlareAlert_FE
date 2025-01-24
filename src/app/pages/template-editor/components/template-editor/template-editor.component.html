@@ -2,7 +2,7 @@
   <h5>Edit Template</h5>
   <form [formGroup]="templateForm" class="text-editor">
     <div class="template-name-container">
-      <label for="template-name">Template Name</label>
+      <label for="template-name">Name</label>
       <input
         id="template-name"
         type="text"
@@ -11,8 +11,18 @@
         formControlName="templateName"
       >
     </div>
+    <div class="template-description-container">
+      <label for="template-description">Description</label>
+      <input
+        id="template-description"
+        type="text"
+        class="form-control"
+        placeholder="..."
+        formControlName="templateDescription"
+      >
+    </div>
     <div class="template-content-container">
-      <label for="template-content">Template Content</label>
+      <label for="template-content">Content</label>
       <textarea
         id="template-content"
         class="form-control"

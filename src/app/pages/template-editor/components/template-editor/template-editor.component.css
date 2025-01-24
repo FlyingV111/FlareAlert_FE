@@ -1,34 +1,35 @@
-.template-editor{
+.template-editor {
   width: 100%;
   height: 100%;
 }
 
-.template-editor h5{
+.template-editor h5 {
   color: var(--accent-color);
   margin-bottom: 1.5rem;
 }
 
-.template-editor .text-editor{
+.template-editor .text-editor {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   height: 100%;
 }
 
-.template-editor .text-editor .template-name-container{
+.template-editor .text-editor .template-description-container,
+.template-editor .text-editor .template-name-container {
   display: flex;
   flex-direction: column;
   gap: .5rem;
 }
 
-.template-editor .text-editor .template-content-container{
+.template-editor .text-editor .template-content-container {
   display: flex;
   flex-direction: column;
   gap: .5rem;
   flex: 1;
 }
 
-.template-editor .text-editor .template-content-container textarea{
+.template-editor .text-editor .template-content-container textarea {
   flex: 1;
   resize: none;
 }

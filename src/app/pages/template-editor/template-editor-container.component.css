@@ -12,12 +12,21 @@ main {
 .site-description-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .site-description-container h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
   margin-bottom: .5rem;
+}
+
+.site-description-container h3 lucide-icon {
+  cursor: pointer;
 }
 
 .template-editor-container {
@@ -25,7 +34,7 @@ main {
   height: 100%;
 }
 
-.template-editor-container{
+.template-editor-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;

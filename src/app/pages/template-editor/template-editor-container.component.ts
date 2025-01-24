@@ -8,9 +8,10 @@ import {
   NotificationTemplateSettings,
   Template
 } from '../../models/CreateTemplate';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TemplateSettingsComponent} from './components/template-settings/template-settings.component';
 import {TemplateEditorComponent} from './components/template-editor/template-editor.component';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-email-editor',
@@ -19,7 +20,9 @@ import {TemplateEditorComponent} from './components/template-editor/template-edi
     FormsModule,
     ReactiveFormsModule,
     TemplateSettingsComponent,
-    TemplateEditorComponent
+    TemplateEditorComponent,
+    NgIf,
+    RouterLink
   ],
   templateUrl: './template-editor-container.component.html',
   styleUrl: './template-editor-container.component.css'
@@ -27,7 +30,9 @@ import {TemplateEditorComponent} from './components/template-editor/template-edi
 export class TemplateEditorContainerComponent implements OnInit {
   private templateService = inject(TemplateService)
   private route = inject(ActivatedRoute)
+  private router = inject(Router)
   protected currentTemplate = signal<NotificationTemplate | null>(null)
+  protected savingTemplate = signal<boolean>(false)
   private templateSettingsValues = signal<NotificationTemplateSettings | null>(null)
   private templateValues = signal<Template | null>(null)
   private isTemplateFormValid = false;
@@ -36,6 +41,10 @@ export class TemplateEditorContainerComponent implements OnInit {
   constructor() {
     effect(() => {
       this.currentTemplate = this.templateService.currentTemplate
+    });
+
+    effect(() => {
+      this.savingTemplate = this.templateService.savingTemplate
     });
   }
 
@@ -75,9 +84,14 @@ export class TemplateEditorContainerComponent implements OnInit {
       const createTemplateObject: CreateTemplate = {
         notificationTemplateSettings: this.templateSettingsValues()!,
         templateName: this.templateValues()!.templateName,
+        templateDescription: this.templateValues()!.templateDescription,
         templateContent: this.templateValues()!.templateContent
       }
       this.templateService.saveTemplate(createTemplateObject);
     }
+  }
+
+  protected goBack() {
+    this.router.navigate(['template-overview']).then();
   }
 }

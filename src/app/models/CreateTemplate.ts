@@ -10,6 +10,7 @@ export interface NotificationTemplate extends CreateTemplate {
 
 export type Template = {
   templateName: string;
+  templateDescription: string;
   templateContent: string;
 }
 

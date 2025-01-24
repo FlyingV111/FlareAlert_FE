@@ -15,9 +15,9 @@ export class ConnectionService {
   loadingApiKey = signal<boolean>(false);
   loadingWebhookUrl = signal<boolean>(false);
 
-  generateWebhookUrl(userId: string) {
+  generateWebhookUrl() {
     this.loadingWebhookUrl.set(true);
-    this.http.get<WebhookUrl>(`${this.backendUrl}/${userId}/webhook/generate/url`).subscribe({
+    this.http.get<WebhookUrl>(`${this.backendUrl}/webhook/generate/url`).subscribe({
       next: (response) => {
         if (!response.webhookUrl.startsWith(this.baseUrl)) {
           response.webhookUrl = this.baseUrl + response.webhookUrl;
@@ -36,9 +36,9 @@ export class ConnectionService {
     });
   }
 
-  generateApiKey(userId: string) {
+  generateApiKey() {
     this.loadingApiKey.set(true);
-    this.http.get<ApiKey>(`${this.backendUrl}/${userId}/webhook/generate/apikey`).subscribe({
+    this.http.get<ApiKey>(`${this.backendUrl}/webhook/generate/apikey`).subscribe({
       next: (response) => {
         this.webhook.update((webhook) => {
           return webhook ? {...webhook, apiKey: response.apiKey} : null;
@@ -53,9 +53,9 @@ export class ConnectionService {
     });
   }
 
-  getWebhookUrl(userId: string) {
+  getWebhookUrl() {
     this.loadingWebhook.set(true);
-    this.http.get<Webhook>(`${this.backendUrl}/${userId}/webhook`).subscribe({
+    this.http.get<Webhook>(`${this.backendUrl}/webhook`).subscribe({
       next: (response) => {
         if (!response.webhookUrl.startsWith(this.baseUrl)) {
           response.webhookUrl = this.baseUrl + response.webhookUrl;
@@ -71,8 +71,8 @@ export class ConnectionService {
     });
   }
 
-  updateWebhookEnabled(userId: string, enabled: boolean) {
-    this.http.put<Webhook>(`${this.backendUrl}/${userId}/webhookEnabled`, {webhookEnabled: enabled}).subscribe({
+  updateWebhookEnabled(enabled: boolean) {
+    this.http.put<Webhook>(`${this.backendUrl}/webhookEnabled`, {webhookEnabled: enabled}).subscribe({
       next: (response) => {
         this.webhook.set(response);
       },

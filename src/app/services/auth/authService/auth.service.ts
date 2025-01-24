@@ -13,8 +13,7 @@ export class AuthService {
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
   isSiteLoading = signal<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, email: string, password: string): void {
     this.isSiteLoading.set(true);

@@ -10,8 +10,12 @@ export class TemplateService {
   private backendUrl = environment.backendUrl + "/notification/template";
   private http = inject(HttpClient);
   currentTemplate = signal<NotificationTemplate | null>(null);
+  templates = signal<NotificationTemplate[]>([]);
+  savingTemplate = signal<boolean>(false)
+  deletingTemplate = signal<boolean>(false)
 
   saveTemplate(template: CreateTemplate) {
+    this.savingTemplate.set(true);
     this.http.post<NotificationTemplate>(`${this.backendUrl}`, template).subscribe({
       next: (response) => {
         this.currentTemplate.set(response);
@@ -26,14 +30,19 @@ export class TemplateService {
               },
               error: (updateError) => {
                 console.error(updateError);
-              }
+              },
+              complete: () => {
+                this.savingTemplate.set(false);
+              },
             });
           }
         } else {
           console.error(error);
+          this.savingTemplate.set(false);
         }
       },
       complete: () => {
+        this.savingTemplate.set(false);
       },
     });
   }
@@ -49,5 +58,36 @@ export class TemplateService {
       complete: () => {
       },
     });
+  }
+
+  getAllTemplates() {
+    this.http.get<NotificationTemplate[]>(`${this.backendUrl}`).subscribe({
+      next: (response) => {
+        this.templates.set(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+      },
+    });
+  }
+
+  deleteTemplate(name: string) {
+    this.deletingTemplate.set(true);
+    this.http.delete(`${this.backendUrl}/${name}`).subscribe({
+        next: () => {
+          this.templates.update((templates) => {
+            return templates.filter(template => template.templateName !== name);
+          })
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {
+          this.deletingTemplate.set(false);
+        },
+      }
+    )
   }
 }

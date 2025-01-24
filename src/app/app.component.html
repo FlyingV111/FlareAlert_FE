@@ -3,7 +3,14 @@
   <div class="content-container">
     <top-nav class="top-nav" *ngIf="authService.isAuthenticated"></top-nav>
     <div class="content">
-      <router-outlet></router-outlet>
+      @if (isSiteLoading()) {
+        <div class="site-loading-container">
+          <div class="spinner-border" role="status"></div>
+          <h2>Loading</h2>
+        </div>
+      } @else {
+        <router-outlet></router-outlet>
+      }
     </div>
   </div>
 </main>

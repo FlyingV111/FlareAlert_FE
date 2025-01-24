@@ -22,6 +22,7 @@ export class TemplateEditorComponent {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.templateForm = new FormGroup({
       templateName: new FormControl(this.template()?.templateName || '', Validators.required),
+      templateDescription: new FormControl(this.template()?.templateDescription || ''),
       templateContent: new FormControl(this.template()?.templateContent || '')
     });
 
@@ -34,6 +35,7 @@ export class TemplateEditorComponent {
     effect(() => {
       this.templateForm.patchValue({
         templateName: this.template()?.templateName,
+        templateDescription: this.template()?.templateDescription,
         templateContent: this.template()?.templateContent
       });
     });

@@ -1,6 +1,11 @@
 <main>
   <header class="site-description-container">
-    <h3>Notification Settings</h3>
+    <h3>
+      <a routerLink="/templates">
+        <lucide-icon name="chevron-left" color="var(--secondary-text-color)" size="32"/>
+      </a>
+      Notification Settings
+    </h3>
     <p class="text-secondary">Manage and customize your email templates</p>
   </header>
   <div class="template-editor-container">
@@ -15,5 +20,8 @@
       (onSettingsChange)="onTemplateSettingsValuesChanged($event)">
     </template-settings>
   </div>
-  <button class="btn btn-primary" [disabled]="isSaveDisabled()" (click)="saveSettings()">Save Settings</button>
+  <button class="btn btn-primary" [disabled]="isSaveDisabled()" (click)="saveSettings()">
+    <span class="spinner-border spinner-border-sm me-2" aria-hidden="true" *ngIf="savingTemplate()"></span>
+    <span>Save Settings</span>
+  </button>
 </main>
