@@ -5,6 +5,7 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 @Component({
   selector: 'side-nav',
   templateUrl: './side-nav.component.html',
+  standalone: true,
   imports: [
     LucideAngularModule,
     RouterLinkActive,

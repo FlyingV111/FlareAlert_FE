@@ -8,6 +8,7 @@ import {UserService} from '../../../services/user-service/user.service';
 
 @Component({
   selector: 'top-nav',
+  standalone: true,
   imports: [
     LucideAngularModule,
     NgIf,
