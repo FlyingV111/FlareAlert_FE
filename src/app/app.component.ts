@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {AuthService} from './services/auth/authService/auth.service';
 import {UserService} from './services/user-service/user.service';
 
@@ -8,7 +8,7 @@ import {UserService} from './services/user-service/user.service';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   protected authService = inject(AuthService)
   protected userService = inject(UserService)
   protected title = 'FlareAlert';
@@ -24,6 +24,10 @@ export class AppComponent {
     //     this.alertService.connect()
     //   }
     // });
+  }
+
+  ngOnInit(): void {
+    this.authService.silentRefresh()
   }
 
   //

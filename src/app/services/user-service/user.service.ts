@@ -1,8 +1,7 @@
 import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User, UserSearchResult} from '../../models/User';
+import {User} from '../../models/User';
 import {environment} from '../../../environments/environment';
-import {Observable, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

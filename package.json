@@ -23,7 +23,6 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "echarts": "^5.5.1",
-    "leaflet": "^1.9.4",
     "lucide-angular": "^0.469.0",
     "ngx-cookie-service": "^19.0.0",
     "ngx-echarts": "^19.0.0",

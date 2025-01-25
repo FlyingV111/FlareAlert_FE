@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {TokenResponse} from '../../../models/auth/TokenResponse';
+import {TokenRefreshRequest} from '../../../models/auth/TokenRefreshRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
   isSiteLoading = signal<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   login(username: string, email: string, password: string): void {
     this.isSiteLoading.set(true);
@@ -21,8 +23,8 @@ export class AuthService {
       next: (response) => {
         if (response) {
           try {
-            localStorage.setItem(this.TOKEN_KEY, response.accessToken);
-            localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
+            sessionStorage.setItem(this.TOKEN_KEY, response.accessToken);
+            sessionStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
           } catch (e) {
             console.error(e)
           }
@@ -40,16 +42,42 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    sessionStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.REFRESH_TOKEN_KEY);
     this.router.navigate(['/login']).then();
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return sessionStorage.getItem(this.TOKEN_KEY);
   }
 
   get isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  silentRefresh() {
+    const request: TokenRefreshRequest = {
+      accessToken: this.getToken() || '',
+      refreshToken: sessionStorage.getItem(this.REFRESH_TOKEN_KEY) || ''
+    }
+    if (!request.accessToken || !request.refreshToken) {
+      return;
+    }
+    this.http.post<TokenResponse>(`${this.backendAuthUrl}/refresh-token`, request).subscribe({
+      next: (response) => {
+        if (response) {
+          try {
+            sessionStorage.setItem(this.TOKEN_KEY, response.accessToken);
+            sessionStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
+          } catch (e) {
+            console.error(e)
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.router.navigate(['/login']).then();
+      },
+    })
   }
 }

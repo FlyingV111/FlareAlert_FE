@@ -7,9 +7,9 @@ import {Router} from '@angular/router';
 
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('authToken');
   const router = inject(Router);
   const authService = inject(AuthService);
+  const token = authService.getToken();
 
   if (req.url.startsWith(environment.backendUrl) && token) {
     const clonedRequest = req.clone({

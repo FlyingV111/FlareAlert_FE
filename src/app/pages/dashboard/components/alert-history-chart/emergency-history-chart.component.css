@@ -19,6 +19,8 @@
 }
 
 .alert-history-container .chart-container .custom-body{
+  width: 100%;
+  height: 100%;
   padding: 1.5rem;
   display: flex;
   justify-content: center;

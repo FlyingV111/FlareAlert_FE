@@ -1,16 +1,16 @@
 import {Component, effect, inject, OnInit, signal} from '@angular/core';
-import {NgForOf} from '@angular/common';
 import {LucideAngularModule} from 'lucide-angular';
 import {TemplateService} from '../../services/templateService/template.service';
-import {Router, RouterLink} from '@angular/router';
 import {NotificationTemplate} from '../../models/CreateTemplate';
+import {RouterLink} from '@angular/router';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-template-overview',
   imports: [
-    NgForOf,
     LucideAngularModule,
-    RouterLink
+    RouterLink,
+    NgForOf
   ],
   templateUrl: './template-overview.component.html',
   styleUrl: './template-overview.component.css'

@@ -26,6 +26,7 @@
   --btn-dark-active-background: #1A2332;
   --btn-dark-active-border: #1A2332;
   --btn-dark-disabled-background: #1A2332;
+
   a {
     color: var(--accent-color);
   }
@@ -67,7 +68,7 @@
     --bs-btn-disabled-border-color: var(--btn-dark-disabled-background);
   }
 
-  .form-switch .form-check-input{
+  .form-switch .form-check-input {
     padding: .5rem;
     width: 2.5rem;
     margin-right: .5rem;
@@ -94,7 +95,7 @@
     border-radius: .8rem !important;
   }
 
-  .card-body{
+  .card-body {
     padding: 1.5rem !important;
   }
 
@@ -153,7 +154,7 @@
     margin: 0;
   }
 
-  .btn-outline-primary{
+  .btn-outline-primary {
     --bs-btn-color: var(--accent-color);
     --bs-btn-border-color: var(--accent-color);
 
@@ -162,7 +163,7 @@
     --bs-btn-active-border-color: var(--accent-color);
   }
 
-  .btn-primary-select{
+  .btn-primary-select {
     --bs-btn-color: var(--secondary-text-color);
     --bs-btn-border-color: var(--border-color);
     --bs-btn-bg: var(--border-color);
@@ -176,7 +177,7 @@
     background: var(--accent-color) !important;
   }
 
-  .form-select{
+  .form-select {
     --bs-body-color: var(--text-color);
     --bs-body-bg: var(--input-bg-color);
   }
@@ -188,8 +189,13 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body, html {
   height: 100dvh;
+  min-height: 100svh;
 }
 
 body {
@@ -200,6 +206,7 @@ body {
 input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(55%) sepia(96%) saturate(4897%) hue-rotate(339deg) brightness(105%) contrast(88%);
 }
+
 main::before {
   content: "";
   position: fixed;
